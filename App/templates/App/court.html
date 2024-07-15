@@ -1,0 +1,54 @@
+{% extends 'includes/main.html' %}
+
+
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-success" role="alert">
+    {{ message }}.<a href="{% url 'checkout'%}">Start payment</a> 
+</div>
+{% endfor %}
+{% endif %}
+
+<div class="row">
+    <div class="col-md-7">
+        <div class="px-4 pt-5 my-5 text-center">
+            <h1 class="display-4 fw-bold text-body-emphasis">{{court.name}}</h1>
+            <div class="col-lg-6 mx-auto">
+                <p class="lead mb-4">{{court.description}}</p>
+            </div>
+            <div class="overflow-hidden">
+                <div class="container px-5">
+                    <img src="../../{{court.pre_image}}" width="1000" height="500" alt="">
+                </div>
+            </div>
+            {% for image in images %}
+            <br>
+            <div class="overflow-hidden">
+                <div class="container px-5">
+                    <img src="../../{{image.name}}" width="1000" height="500" alt="">
+                    <p>{{image.caption}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="px-4 pt-5 my-5">
+
+
+
+            <h1 class="display-4 fw-bold text-body-emphasis">Book Now</h1>
+            <form action="" method="POST">
+                <div class="form-group">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                </div><br>
+                <input type="submit" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock%}

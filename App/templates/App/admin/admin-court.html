@@ -1,0 +1,76 @@
+{% include 'includes/admin-header.html' %}
+{% include 'includes/admin-nav.html' %}
+
+<div class="content" style="padding: 0px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">DashBoard</a></li>
+            <li class="breadcrumb-item">Courts</li>
+            <!-- <li class="breadcrumb-item active" aria-current="page">Data</li> -->
+        </ol>
+    </nav>
+    {% if messages %}
+    <div class="alert alert-success" role="alert">
+        {% for message in messages %}
+            {{message}}
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div style="padding: 20px;">
+        <div class="d-flex justify-content-between mb-3">
+            <h2>All Courts</h2>
+            <a href="{% url 'admin-add-court' %}" class="btn btn-primary"><i
+                    class="fas fa-plus"></i>Add</a>
+        </div>
+        <table class="table table-hover">
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Location</th>
+                <th>Light</th>
+                <th>Status</th>
+                <th>Image</th>
+                <th>Created</th>
+                <th colspan="2">Action</th>
+                {% for court in courts %}
+            <tr>
+                <td>{{ court.id }}</td>
+                <td>{{ court.name }}</td>
+                {% if court.court_type == "hardcourt" %}
+                <td><span class="badge badge-pill badge-primary">{{court.court_type}}</span></td>
+                {% else %}
+                <td><span class="badge badge-pill badge-secondary">{{court.court_type}}</span></td>
+                {% endif %}
+                {% if court.court_location == "outside" %}
+                <td><span class="badge badge-pill badge-secondary">{{court.court_location}}</span></td>
+                {% else %}
+                <td><span class="badge badge-pill badge-primary">{{court.court_location}}</span></td>
+                {% endif %}
+                {% if court.has_lighting == True %}
+                <td><span class="badge badge-pill badge-primary">{{court.has_lighting}}</span></td>
+                {% else %}
+                <td><span class="badge badge-pill badge-warning">{{court.has_lighting}}</span></td>
+                {% endif %}
+                {% if court.is_available == True %}
+                <td><span class="badge badge-pill badge-success"><a
+                            href="{% url 'admin-courts-status' court.id %}?state=False"
+                            class="text-decoration-none text-light">Available</a></span></td>
+                {% else %}
+                <td><span class="badge badge-pill badge-danger"><a
+                            href="{% url 'admin-courts-status' court.id %}?state=True"
+                            class="text-decoration-none text-light">Not Available</a></span></td>
+                {% endif %}
+                <td><img src="../{{court.pre_image}}" width="100" height="50" alt=""></td>
+                <td>{{ court.created_at | timesince }}</td>
+                <td class="text-primary"><a href="{% url 'edit-court' court.id %}"><i class="fas fa-pen"></i></a></td>
+                <td><a href="{% url 'delete-court' court.id %}" class="text-danger" onclick="return confirm('Are you sure to delete?');"><i class="fas fa-trash"></i></a></td>
+            </tr>
+            {% endfor%}
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+{% include 'includes/admin-footer.html' %}

@@ -1,0 +1,72 @@
+{% include 'includes/admin-header.html' %}
+{% include 'includes/admin-nav.html' %}
+
+<div class="content" style="padding: 0px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">DashBoard</a></li>
+            <li class="breadcrumb-item">Bookings</li>
+            <!-- <li class="breadcrumb-item active" aria-current="page">Data</li> -->
+        </ol>
+    </nav>
+    {% if messages %}
+    <div class="alert alert-success" role="alert">
+        {% for message in messages %}
+        {{message}}
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div style="padding: 20px;">
+        <h2>All Bookings</h2>
+        <table class="table table-hover" id="myTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>E-mail</th>
+                    <th>Phone</th>
+                    <th>Session</th>
+                    <th>Court</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>At</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for booking in bookings %}
+            <tr>
+                <td>{{booking.id}}</td>
+                <td>{{booking.name}}</td>
+                <td>{{booking.date}}</td>
+                <td>{{booking.email}}</td>
+                <td>{{booking.phone}}</td>
+                <td>{{booking.session_id}}</td>
+                <td>{{booking.court_id}}</td>
+                <td>{{booking.type}}</td>
+                {%if booking.status == "pendig" %}
+                <td><span class="badge badge-pill badge-warning">Pending</span></td>
+                {% elif booking.status == "paid" %}
+                <td><span class="badge badge-pill badge-success">Payed</span></td>
+                {% elif booking.status == "done" %}
+                <td><span class="badge badge-pill badge-success">Complited</span></td>
+                {% elif booking.status == "cancled" %}
+                <td><span class="badge badge-pill badge-danger">Cancled</span></td>
+                {% endif %}
+                <td>{{booking.created_at | timesince}}</td>
+            </tr>
+            {% endfor%}
+            </tbody>
+            
+        </table>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+</div>
+
+{% include 'includes/admin-footer.html' %}

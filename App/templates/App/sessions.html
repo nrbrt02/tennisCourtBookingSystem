@@ -1,0 +1,40 @@
+{% extends 'includes/main.html' %}
+{% load static%}
+
+{% block content %}
+<div class="position-relative overflow-hidden p-3 p-md-5 text-center bg-body-tertiary the-cover">
+    <div class="col-md-6 p-lg-5 mx-auto my-5">
+        <h1 class="display-3 fw-bold text-dark">Sessions</h1>
+    </div>
+</div>
+<div class="container">
+    <br>
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+        {% for session in sessions%}
+        <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm">
+                <div class="card-header py-3">
+                    <h4 class="my-0 fw-normal">{{session.name}}</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">{{session.price}}Rwf<small
+                            class="text-body-secondary fw-light">/session</small>
+                    </h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li><b>Starts:</b> {{session.startTime}}</li>
+                        <li><b>Ends:</b> {{session.endTime}}</li>
+                        <li><b>Trainer:</b> 
+                            {% if session.isTainer %}
+                                <span class="badge badge-primary text-dark">Avairable</span>
+                            {%else%}
+                            <span class="badge badge-primary text-dark">Not Avairable</span>
+                            {% endif%}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endfor%}
+    </div>
+</div>
+{% endblock %}

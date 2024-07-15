@@ -1,0 +1,39 @@
+{% include 'includes/admin-header.html' %}
+{% include 'includes/admin-nav.html' %}
+
+<div class="content" style="padding: 0px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">DashBoard</a></li>
+            <li class="breadcrumb-item">Sessions</li>
+            <li class="breadcrumb-item">Edit</li>
+            <!-- <li class="breadcrumb-item active" aria-current="page">Data</li> -->
+        </ol>
+    </nav>
+    {% if messages %}
+    <div class="alert alert-success" role="alert">
+        {% for message in messages %}
+        {{message}}
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div style="padding: 20px;">
+        <div class="d-flex justify-content-between mb-3">
+            <h2>Edit Session</h2>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            {{ form }}
+            <br><br>
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+</div>
+
+{% include 'includes/admin-footer.html' %}

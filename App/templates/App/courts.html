@@ -1,0 +1,28 @@
+{% extends 'includes/main.html' %}
+{% load static%}
+
+{% block content %}
+<div class="container">
+    <h3 class="display-3 fw-bold text-secondary">Our Courts</h3>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for court in courts %}
+        <div class="col">
+            <a href="{% url 'court' court.id %}"  style="text-decoration: none;">
+                <div class="card shadow-sm">
+
+                    <img src="{{court.pre_image}}" alt="">
+                    <div class="card-body">
+                        <h5>{{ court.name }}</h5>
+                        <p>{{court.description | truncatechars:100}}</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+
+
+    </div>
+</div>
+<br>
+{% endblock %}

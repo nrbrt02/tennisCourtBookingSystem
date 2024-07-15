@@ -1,0 +1,35 @@
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [{% for title  in book_list %} "{{ title }}", {% endfor %}],
+      datasets: [{
+        label: 'numbers of booking',
+        data: [{% for number in bk_list %} "{{ number }}", {% endfor %}],
+        borderWidth: 1
+      }]
+    },
+    options: {
+        plugins: {
+            title: {
+                display: true,
+                text: 'Booking Analysis'
+            }
+        }
+    }
+  });
+</script>
+
+
+</body>
+</html>

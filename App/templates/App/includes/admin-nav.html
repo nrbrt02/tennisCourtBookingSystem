@@ -1,0 +1,13 @@
+<div class="sidebar">
+    <h1><a href="/"><i class="fas fa-home"></i>Website</a></h1>
+    <h2>Admin Panel</h2>
+    <a href="{% url 'dashboard'%}"><i class="fas fa-home"></i> Home</a>
+    <a href="{% url 'admin-courts'%}"><i class="fas fa-chart-bar"></i> Courts</a>
+    <a href="{% url 'admin-bookings'%}"><i class="fas fa-book-open"></i> Booking</a>
+    <a href="{% url 'admin-sessions'%}"><i class="fas fa-users"></i> Sessions</a>
+    <a href="{% url 'admin-images'%}"><i class="fas fa-picture-o"></i> Images</a>
+    <a href="#"> <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-light"><i class="fas fa-sign-out-alt"></i>Logout</button>
+    </form></a>
+</div>

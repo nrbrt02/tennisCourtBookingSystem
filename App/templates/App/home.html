@@ -1,0 +1,136 @@
+{% extends 'includes/main.html' %}
+{% load static%}
+
+{% block content %}
+
+<div class="position-relative overflow-hidden p-3 p-md-5 text-center bg-body-tertiary the-cover">
+    <div class="col-md-6 p-lg-5 mx-auto my-5">
+        <h1 class="display-3 fw-bold text-dark">Dominate the Game</h1>
+        <h3 class="fw-normal text-muted mb-3">Own the pitch</h3>
+        <div class="d-flex gap-3 justify-content-center lead fw-normal">
+            <a class="icon-link btn btn-dark" href="{% url 'courts'%}">
+                Book Now
+                <svg class="bi">
+                    <use xlink:href="#chevron-right" />
+                </svg>
+            </a>
+        </div>
+    </div>
+    <!-- <div class="product-device shadow-sm d-none d-md-block">
+  <img src="assets/img/josephine-gasser-cv83wpGtFtg-unsplash.jpg"style="top: -25%;" width="300" height="500" alt="">
+
+</div> -->
+    <!-- <div class="product-device product-device-2 shadow-sm d-none d-md-block"> <img
+    src="assets/img/reuben-FcRusNie0hs-unsplash.jpg" width="300" height="500" alt="">
+
+</div> -->
+</div>
+
+<div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
+    <div class="text-bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+        <div class="my-3 py-3">
+            <h2 class="display-5">Personal Trainning</h2>
+            <p class="lead">Start your personal trainning with one of the professional trainers in the city</p>
+        </div>
+        <div class="shadow-sm mx-auto">
+            <img src="{% static 'img/single.jpg'%}" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"
+                alt="">
+        </div>
+    </div>
+    <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+        <div class="my-3 p-3">
+            <h2 class="display-5">Team Trainning</h2>
+            <p class="lead">Train with your co-workes, family, mate ... using our facilities</p>
+        </div>
+        <div class="shadow-sm mx-auto">
+            <img src="{% static 'img/group.jpg'%}" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"
+                alt="">
+        </div>
+    </div>
+</div>
+<hr>
+<div class="container">
+
+    <div class="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
+        <div class="col d-flex flex-column align-items-start gap-2">
+            <h2 class="fw-bold text-body-emphasis">Others main Services Includes...</h2>
+            <p class="text-body-secondary">The weTenn Co. is here to help you access all the facilities and gears all in
+                the same space. And help you raise your standards in Teniss</p>
+            <a href="#" class="btn btn-secondary btn-lg">Explore More</a>
+        </div>
+
+        <div class="col">
+            <div class="row row-cols-1 row-cols-sm-2 g-4">
+                <div class="col d-flex flex-column gap-2">
+                    <div
+                        class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                        <svg class="bi" width="1em" height="1em">
+                            <use xlink:href="#collection" />
+                        </svg>
+                    </div>
+                    <h4 class="fw-semibold mb-0 text-body-emphasis">Personal Training</h4>
+                    <p class="text-body-secondary">Paragraph of text beneath the heading to explain the heading.</p>
+                </div>
+
+                <div class="col d-flex flex-column gap-2">
+                    <div
+                        class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                        <svg class="bi" width="1em" height="1em">
+                            <use xlink:href="#gear-fill" />
+                        </svg>
+                    </div>
+                    <h4 class="fw-semibold mb-0 text-body-emphasis">Couple Training</h4>
+                    <p class="text-body-secondary">Paragraph of text beneath the heading to explain the heading.</p>
+                </div>
+
+                <div class="col d-flex flex-column gap-2">
+                    <div
+                        class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                        <svg class="bi" width="1em" height="1em">
+                            <use xlink:href="#speedometer" />
+                        </svg>
+                    </div>
+                    <h4 class="fw-semibold mb-0 text-body-emphasis">Kids Session</h4>
+                    <p class="text-body-secondary">Paragraph of text beneath the heading to explain the heading.</p>
+                </div>
+
+                <div class="col d-flex flex-column gap-2">
+                    <div
+                        class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                        <svg class="bi" width="1em" height="1em">
+                            <use xlink:href="#table" />
+                        </svg>
+                    </div>
+                    <h4 class="fw-semibold mb-0 text-body-emphasis">Old Blood Training</h4>
+                    <p class="text-body-secondary">Paragraph of text beneath the heading to explain the heading.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <h3 class="display-3 fw-bold text-secondary">Our Courts</h3>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for court in courts %}
+        <div class="col">
+            <a href="{% url 'court' court.id %}">
+                <div class="card shadow-sm">
+
+                    <img src="{{court.pre_image}}" alt="">
+                    <div class="card-body">
+                        <h5>{{ court.name }}</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+
+
+    </div>
+    <hr>
+    <h3 class="display-3 fw-bold text-secondary"><a href="{% url 'sessions'%}">Pricings</a></h3>
+
+</div>
+
+{% endblock%}

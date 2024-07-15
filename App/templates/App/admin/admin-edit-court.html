@@ -1,0 +1,35 @@
+{% include 'includes/admin-header.html' %}
+{% include 'includes/admin-nav.html' %}
+
+<div class="content" style="padding: 0px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">DashBoard</a></li>
+            <li class="breadcrumb-item">Courts</li>
+            <li class="breadcrumb-item">Edit</li>
+            <!-- <li class="breadcrumb-item active" aria-current="page">Data</li> -->
+        </ol>
+    </nav>
+    {% if messages %}
+    <div class="alert alert-success" role="alert">
+        {% for message in messages %}
+            {{message}}
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div style="padding: 20px;">
+        <h2>Add Court</h2>
+        <hr>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form }}
+            <br>
+            <br>
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+    </div>
+
+
+</div>
+
+{% include 'includes/admin-footer.html' %}
